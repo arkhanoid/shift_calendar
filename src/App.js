@@ -6,7 +6,7 @@ import Calendar from 'rc-year-calendar';
 import 'rc-year-calendar/locales/rc-year-calendar.pt';
 //import 'rc-year-calendar/locales/rc-year-calendar.no';
 import 'rc-year-calendar/locales/rc-year-calendar.es';
-
+import Social from "./social"
 
 
 import "/node_modules/flag-icons/css/flag-icons.min.css";
@@ -25,7 +25,7 @@ import { Helmet } from "react-helmet";
 
 function App() {
 
-const [lang, setLang] = useState('pt');
+const [lang, setLang] = useState('en');
 const [escala, setEscala] = useState('14 x 21');
 const [inicio, setInicio] = useState(Date.now());
 const loc = {
@@ -77,7 +77,8 @@ const escalas = {
  '7 x 7/7 x 14': [7,7,7,14],
  '21 x 21': [21,21],
  '4x1/3x3': [4,1,3,3],
- '14 x 28': [14, 28]
+ '14 x 28': [14, 28],
+ '28 x 28': [28,28]
 }
 
 function addDays(date, days) {
@@ -106,28 +107,30 @@ function * embarques (data) {
 
 }	
 
-const  dataSource= [... embarques(inicio) ];
+const  dataSource= [ ...embarques(inicio) ];
 
 //console.log(dataSource); 
 
 var title = loc[lang]['calendario_offshore']; 
 const description = "Offshore shift calendar calculator";
-
+const url  = "https://rigshift.com/";
+const url_image = url + "image.png";
   return (
 <>
  
 <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="twitter:card" content="summary_large_image" />        
+        <meta name="twitter:card" content={url_image} />        
         <meta name="twitter:site" content="@user" />        
-        <meta name="twitter:creator" content="@user" />        <meta name="twitter:title" content="Pets - Products" />        
-        <meta name="twitter:description" content="Best Products for your pet" />        
-        <meta name="twitter:image" content="url_to_image"/>        
+        <meta name="twitter:creator" content="@user" /> 
+        <meta name="twitter:title" content="Offshore Calendar" />        
+        <meta name="twitter:description" content={description} />        
+        <meta name="twitter:image" content={url_image}/>        
         <meta property="og:title" content={title} />        
         <meta property="og:description" content={description} />        
-        <meta property="og:image" content="url_to_image"/>
-        <meta property="og:url" content="pets.abc" />
+        <meta property="og:image" content={url_image}/>
+        <meta property="og:url" content={url} />
         <meta property="og:site_name" content="Offshore Calendar" />
         <meta property="og:locale" content="en_US" />
         <meta http-equiv="Content-Language" content={Object.keys(loc).join(",")} />
@@ -137,7 +140,7 @@ const description = "Offshore shift calendar calculator";
   <header className="h3 grid"> 
    
   <div className="row text-primary text-center m-3">{loc[lang]['calendario_offshore']}</div> 
-  <div className="row"> 
+  <div className="row pe-3"> 
   <DropdownButton className="col col-sm-3" id="dropdown-item-button" title={loc[lang]['select_language']}>
       { Object.keys(loc).map( lang => <Dropdown.Item  as="button" onClick={() => setLang(lang)}><span className={`fi fi-${bandeiras[lang]}`}></span><span className="text-end">{lang}</span></Dropdown.Item>)}
   </DropdownButton>
@@ -151,9 +154,9 @@ const description = "Offshore shift calendar calculator";
   </div>
 </header>
   
-  <Calendar language={lang} style='background' dataSource={dataSource} onDayClick={(e) =>  setInicio(e.date) }/>  
+  <Calendar language={lang} style="background" dataSource={dataSource} onDayClick={(e) =>  setInicio(addDays(e.date, -escalas[escala].reduce( (a,b) => a+b ))) }/>  
   
-  <footer className="fw-lighter"> <a href="https://github.com/arkhanoid/shiftcalendar"> This Page is Open Source </a> </footer>
+  <footer className="fw-lighter"> <a href="https://github.com/arkhanoid/shift_calendar"> This Page is Open Source </a> <Social /> </footer>
   </div> 
   </>
 );
