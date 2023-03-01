@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## project description
+
+This project generates a typical offshore work/leave calendar. You can select the shift type, the language and click on the first day on duty to get the days on duty marked on claendar. 
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -78,7 +78,42 @@ const escalas = {
  '21 x 21': [21,21],
  '4x1/3x3': [4,1,3,3],
  '14 x 28': [14, 28],
- '28 x 28': [28,28]
+ '28 x 28': [28,28],
+ // escalas SEAL:
+ '3 x 2': [3, 2],
+ '2x1x2x5': [2,1,2,5],
+ '5x4x2x1x5x3x3x1x4x4x2x1': [5,4,2,1,5,3,3,1,4,4,2,1],
+ '6x4x7x4x6x4x7x4': [6,4,7,4,6,4,7,4],
+ '6 x 9': [6, 9],
+ // escalas amazonas:
+ '3x4x3x5': [3,4,3,5],
+ '4 x 6': [4, 6], 
+ '6x3x6x5x3x1x4x1x2x4': [6,3,6,5,3,1,4,1,2,4],
+ '6 x 4' : [6, 4],
+ '6x5x3x1x4x1x2x4x6x3': [6,5,3,1,4,1,2,4,6,3],
+ // BAHIA
+ '2x4x4x1x3x3x5x1x2x4x5x1': [2,4,4,1,3,3,5,1,2,4,5,1],
+ '5x1x2x4x5x1x2x4x4x1x3x3': [5,1,2,4,5,1,2,4,4,1,3,3],
+ '5 x 4': [5, 4],
+ '7x2x7x1x7x2x7x2': [7,2,7,1,7,2,7,2],
+ '7x4x7x5x7x5': [7,4,7,5,7,5],
+ // Espirito santo
+ '6x1x6x17': [6,1,6,17],
+ '6x6x6x12': [6,6,6,12],
+ '8 x 12': [8, 12],
+ // MS
+ '9 x 6': [9, 6],
+ // MG
+ '3x1x4x1x2x4x6x3x6x5': [3,1,4,1,2,4,6,3,6,5],
+ // PR
+ '3x1x4x1x3x5x4x1x3x1x4x5': [3,1,4,1,3,5,4,1,3,1,4,5],
+ '10x7x11x7':[10,7,11,7],
+ '4x1x2x4x6x3x6x5x3x1': [4,1,2,4,6,3,6,5,3,1],
+ '4x1x3x3x5x1x2x4x5x1x2x4': [4,1,3,3,5,1,2,4,5,1,2,4],
+ // RJ
+ '2x4x2x2x2x3x2x1x2x3x2x1x2x7': [2,4,2,2,2,3,2,1,2,3,2,1,2,7],
+
+
 }
 
 function addDays(date, days) {
@@ -113,7 +148,7 @@ const  dataSource= [ ...embarques(inicio) ];
 
 var title = loc[lang]['calendario_offshore']; 
 const description = "Offshore shift calendar calculator";
-const url  = "https://rigshift.com/";
+const url  = "https://rigshifts.com/";
 const url_image = url + "image.png";
   return (
 <>
@@ -154,7 +189,7 @@ const url_image = url + "image.png";
   </div>
 </header>
   
-  <Calendar language={lang} style="background" dataSource={dataSource} onDayClick={(e) =>  setInicio(addDays(e.date, -escalas[escala].reduce( (a,b) => a+b ))) }/>  
+  <Calendar language={lang} style="background" dataSource={dataSource} onDayClick={(e) =>  setInicio(e.date) }/>  
   
   <footer className="fw-lighter"> <a href="https://github.com/arkhanoid/shift_calendar"> This Page is Open Source </a> <Social /> </footer>
   </div> 
